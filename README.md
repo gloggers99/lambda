@@ -1,2 +1,2 @@
 # lambda
-Wayland compositor
+readme coming soon.

@@ -30,7 +30,6 @@ pub fn action_parser(action: &String, wm: &wm::WindowManager, event: xlib::XKeyE
                                                          .expect("Failed to spawn process");
         },
         "refresh" => {
-            println!("refreshing");
             wm.refresh();
         },
         _ => {

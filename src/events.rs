@@ -10,7 +10,7 @@ pub fn createnotify_event(wm: &wm::WindowManager, event: xlib::XEvent) {
         let e: xlib::XCreateWindowEvent = From::from(event);
 
         // TODO: check if window is already in wm.windows
-        // if this is implemented properly this should not be required!
+        //       if this is implemented properly this should not be required!
 
         wm::WINDOWS.push(e.window);
 

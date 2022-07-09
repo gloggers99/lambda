@@ -69,9 +69,10 @@ impl WindowManager {
         }
     }
 
-    pub fn run(&self) {
+    pub fn refresh(&self) {
         unsafe {
-            xlib::XSync(self.display, false as c_int);
+            // clear wm::WINDOWS
+            WINDOWS.clear();
 
             // add existing windows to wm::WINDOWS
             let mut root_return = 0;
@@ -96,6 +97,14 @@ impl WindowManager {
 
                 WINDOWS.push(child);
             }
+        }
+    }
+
+    pub fn run(&self) {
+        unsafe {
+            xlib::XSync(self.display, false as c_int);
+
+            self.refresh();
 
             loop {
                 let mut event: xlib::XEvent = mem::zeroed();
@@ -105,9 +114,9 @@ impl WindowManager {
                     xlib::CreateNotify => events::createnotify_event(self, event),
                     xlib::DestroyNotify => events::destroynotify_event(self, event),
                     xlib::KeyPress => events::keypress_event(self, event),
-                    xlib::ButtonPress => println!("Button Pressed Event"),
-                    xlib::ConfigureNotify => println!("Configure Notify"),
-                    xlib::ConfigureRequest => println!("Configure Request"),
+                    //xlib::ButtonPress => println!("Button Pressed Event"),
+                    //xlib::ConfigureNotify => println!("Configure Notify"),
+                    //xlib::ConfigureRequest => println!("Configure Request"),
                     //xlib::MapNotify => println!("Map Notify"),
                     xlib::MapRequest => events::maprequest(self, event),
                     _ => {}

@@ -7,11 +7,6 @@ mod events;
 mod keys;
 mod layouts;
 
-// TODO: check if window size is less than ~10 when spawned
-//       and remove from wm::WINDOWS. When running neofetch
-//       from urxvt, it spawns a zombie-like window and doesnt
-//       send a destroy request.
-
 fn main() {
     let window_manager = wm::WindowManager::new();
 

@@ -14,10 +14,6 @@ pub fn createnotify_event(wm: &wm::WindowManager, event: xlib::XEvent) {
 
         wm::WINDOWS.push(e.window);
 
-        for w in &wm::WINDOWS {
-            println!("{} ", w);
-        }
-
         layouts::tile(wm);
     }
 }

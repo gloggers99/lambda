@@ -7,6 +7,7 @@ use libc::{ c_int, c_uint };
 
 use crate::events;
 use crate::keys;
+use crate::config;
 
 pub static mut WINDOWS: Vec<xlib::Window> = vec![];
 pub static mut KEYS: Vec<keys::KeyPair> = vec![];
@@ -26,10 +27,12 @@ pub unsafe extern "C" fn x_error_handler(_display: *mut xlib::Display,
 pub struct WindowManager {
     pub display: *mut xlib::Display,
     pub root: xlib::Window,
+    // save config here for later
+    pub config: config::Config
 }
 
 impl WindowManager {
-    pub fn new() -> WindowManager {
+    pub fn new(config: &config::Config) -> WindowManager {
         unsafe {
             xlib::XSetErrorHandler(std::option::Option::Some(x_error_handler));
 
@@ -44,22 +47,28 @@ impl WindowManager {
 
             println!("Connected to X server successfully.");
 
-            return WindowManager {
+            let wm: WindowManager = WindowManager {
                 display: display,
-                root: root
+                root: root,
+                config: config.clone()
             };
+
+            Self::add_keys(&wm, wm.config.keys.clone());
+            println!("Registered keys successfully.");
+
+            return wm;
         }
     }
 
-    pub fn add_keys(&self, keys: Vec<keys::KeyPair>) {
+    pub fn add_keys(wm: &WindowManager, keys: Vec<keys::KeyPair>) {
         unsafe {
             for key in keys {
                 // register key on X server then push to `KEYS`
-                xlib::XGrabKey(self.display,
-                               xlib::XKeysymToKeycode(self.display,
+                xlib::XGrabKey(wm.display,
+                               xlib::XKeysymToKeycode(wm.display,
                                                       xlib::XStringToKeysym(key.key.as_ptr())) as c_int,
                                key.modifier,
-                               self.root,
+                               wm.root,
                                true as c_int,
                                xlib::GrabModeAsync,
                                xlib::GrabModeAsync);

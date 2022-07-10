@@ -38,6 +38,7 @@ pub fn action_parser(action: &String, wm: &wm::WindowManager, event: xlib::XKeyE
     }
 }
 
+#[derive(Clone)]
 pub struct KeyPair {
     pub modifier: c_uint,
     pub key: CString,

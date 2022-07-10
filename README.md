@@ -13,10 +13,12 @@
 </div>
 
 ## IMPORTANT
-lambda is barely functional right now, and will be in this state for quite a bit (few weeks maybe), this section will be removed when it is stable and ready for regular usage.
+lambda is barely functional right now, and will be in this state for quite a bit (few weeks maybe), this section will be removed when it is stable and ready for regular usage.  
 
 ## Info
-lambda is an X11 tiling window manager built in the spirit of XMonad, and DWM. I want to create lambda to improve on XMonad and DWM and learn about the X protocol at the same time.
+lambda is an X11 tiling window manager built in the spirit of XMonad, and DWM. I want to create lambda to improve on XMonad and DWM and learn about the X protocol at the same time.    
+
+Join us at discord: https://discord.gg/4U2Cs7sFW3
 
 ## Q&A
 Q: "Why aren't you using wayland? X11 is old and crappy"  

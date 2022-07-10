@@ -12,4 +12,15 @@
 
 </div>
 
-More information coming soon.
+## IMPORTANT
+lambda is barely functional right now, and will be in this state for quite a bit (few weeks maybe), this section will be removed when it is stable and ready for regular usage.
+
+## Features (All will be implemented at some point)
+- [X] Keybinding System
+- [ ] EWMH/ICCM (No plans for this YET)
+- [X] Window Tiling
+- [ ] r/unixporn Compatible (Lacking decoration/gaps)
+- [ ] IPC
+- [ ] Docks/Bars/Strut support
+- [ ] Wiki/Guide
+- [ ] Screenshots

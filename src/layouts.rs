@@ -2,6 +2,7 @@ use x11::xlib;
 
 use crate::wm;
 
+// TODO: abstract most of layout to make it easier for users to make custom layouts
 pub fn tile(wm: &wm::WindowManager) {
     unsafe {
         if wm::WINDOWS.len() > 0 {
@@ -16,7 +17,13 @@ pub fn tile(wm: &wm::WindowManager) {
 
             for w in &wm::WINDOWS {
                 if w != &master_window {
-                    stack_windows.push(*w);
+                    // get attributes and check if the window is viewable
+                    let mut attr: xlib::XWindowAttributes = std::mem::zeroed();
+                    let ret = xlib::XGetWindowAttributes(wm.display, *w, &mut attr);
+
+                    if ret != 0 {
+                        stack_windows.push(*w);
+                    }
                 }
             }
 

@@ -34,3 +34,11 @@ A: If lambda is missing a feature (and isn't on the TODO list below) and you dee
 - [ ] Docks/Bars/Strut support
 - [ ] Wiki/Guide
 - [ ] Screenshots
+
+## Active bugs (X means fixed)
+- [ ] Running neofetch in urxvt spawns a ghost window
+
+## THANK YOU!!!
+**tinywm: http://incise.org/tinywm.html** - *literally couldn't have figured 99% of everything out without this*  
+**unixporn: https://reddit.com/r/unixporn** - *inspiration*  
+**crazywillbear: https://github.com/crazywillbear** - *emotional support (go follow him and make him happy)*  

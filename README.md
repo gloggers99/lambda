@@ -35,8 +35,11 @@ A: If lambda is missing a feature (and isn't on the TODO list below) and you dee
 - [ ] Wiki/Guide
 - [ ] Screenshots
 
-## Active bugs (X means fixed)
-- [ ] Running neofetch in urxvt spawns a ghost window
+## Active bugs (Check means fixed)
+- [X] Running neofetch in urxvt spawns a ghost window
+
+## Configuration
+Configuration guide will be on the wiki which will be created when lambda is stable.
 
 ## THANK YOU!!!
 **tinywm: http://incise.org/tinywm.html** - *literally couldn't have figured 99% of everything out without this*  

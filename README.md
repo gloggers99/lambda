@@ -15,6 +15,16 @@
 ## IMPORTANT
 lambda is barely functional right now, and will be in this state for quite a bit (few weeks maybe), this section will be removed when it is stable and ready for regular usage.
 
+## Info
+lambda is an X11 tiling window manager built in the spirit of XMonad, and DWM. I want to create lambda to improve on XMonad and DWM and learn about the X protocol at the same time.
+
+## Q&A
+Q: "Why aren't you using wayland? X11 is old and crappy"  
+A: You are correct, X11 is old and hasn't improved much since a decade ago, however in the end there are many small problems in wayland (especially with nvidia) that make it inconvenient to switch to creating a wayland compositor. (see https://gist.github.com/probonopd/9feb7c20257af5dd915e3a9f2d1f2277 for more info)    
+
+Q: "Where is the ___ implementation?"  
+A: If lambda is missing a feature (and isn't on the TODO list below) and you deem it important, create an issue and tell me what you would like.
+
 ## Features (All will be implemented at some point)
 - [X] Keybinding System
 - [ ] EWMH/ICCM (No plans for this YET)

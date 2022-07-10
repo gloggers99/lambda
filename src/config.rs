@@ -23,7 +23,7 @@ pub struct Config {
 impl Config {
     pub fn new() -> Config {
         // Feel free to define variables here for later
-        let terminal = String::from("alacritty");
+        let terminal = String::from("urxvt");
 
         // This will initialize a new Config struct, place your config
         // options here.

@@ -1,7 +1,7 @@
 #[allow(unused_imports)]
 use x11::xlib::{ Mod1Mask, Mod2Mask, Mod3Mask, Mod4Mask, ShiftMask };
 
-use libc::{ c_uint };
+use libc::{ c_uint, c_int };
 
 use crate::keys::{ KeyPair };
 
@@ -16,8 +16,10 @@ use crate::keys::{ KeyPair };
 #[derive(Clone)]
 pub struct Config {
     pub terminal: String,
-    pub keys: Vec<KeyPair>
-    // More configuration variables coming soon.
+    pub keys: Vec<KeyPair>,
+    pub border_width: c_int,
+    pub border_color_focused: u64,
+    pub border_color_normal: u64
 }
 
 impl Config {
@@ -35,7 +37,11 @@ impl Config {
                        KeyPair::new((Mod4Mask | ShiftMask) as c_uint, "c", "close-window"),
                        KeyPair::new(Mod4Mask,                         "p", "spawn || dmenu_run"),
                        KeyPair::new((Mod4Mask | ShiftMask) as c_uint, "Return", "spawn || urxvt"),
-                       KeyPair::new(Mod4Mask,                         "r", "refresh")]
+                       KeyPair::new(Mod4Mask,                         "r", "refresh")],
+
+            border_width: 1,
+            border_color_focused: 0xff0000,
+            border_color_normal: 0xff0000
         };
     }
 }

@@ -3,7 +3,7 @@ use std::mem;
 
 use x11::xlib;
 
-use libc::{ c_int, c_uint };
+use libc::{ c_int };
 
 use crate::events;
 use crate::keys;
@@ -78,27 +78,6 @@ impl WindowManager {
         }
     }
 
-    // INCOMPLETE
-    pub fn frame_window(&self, w: u64) {
-        unsafe {
-
-            // take these variables in a config file later
-            let border_width: c_uint = 3;
-            let border_color = 0xff0000;
-            let bg_color = 0x0000ff;
-
-            let mut attrs: xlib::XWindowAttributes = std::mem::zeroed();
-
-            let ret = xlib::XGetWindowAttributes(self.display, w, &mut attrs);
-
-            if ret == 0 {
-                panic!("XGetWindowAttributes failed.");
-            }
-        }
-    }
-
-    // TODO: we need to frame the window before we add it
-    //       to wm::WINDOWS
     pub fn refresh(&self) {
         unsafe {
             // clear wm::WINDOWS

@@ -9,8 +9,9 @@ pub fn createnotify_event(wm: &wm::WindowManager, event: xlib::XEvent) {
     unsafe {
         let e: xlib::XCreateWindowEvent = From::from(event);
 
-        // TODO: check if window is already in wm.windows
-        //       if this is implemented properly this should not be required!
+
+        xlib::XSetWindowBorderWidth(wm.display, e.window, wm.config.border_width.try_into().unwrap());
+        xlib::XSetWindowBorder(wm.display, e.window, wm.config.border_color_normal);
 
         wm::WINDOWS.push(e.window);
 

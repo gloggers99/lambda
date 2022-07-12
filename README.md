@@ -38,8 +38,8 @@ A: If lambda is missing a feature (and isn't on the TODO list below) and you dee
 - [ ] Screenshots
 
 ## Active bugs (Check means fixed)
-- [X] Running neofetch in urxvt spawns a ghost window
-- [ ] Upon starting alacritty, around 5-10 blank windows spawn
+- [X] Upon starting alacritty/neofetch, around 5-10 blank windows spawn
+- [ ] Ghost windows overall
 
 ## Configuration
 Configuration guide will be on the wiki which will be created when lambda is stable.

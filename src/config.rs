@@ -25,7 +25,7 @@ pub struct Config {
 impl Config {
     pub fn new() -> Config {
         // Feel free to define variables here for later
-        let terminal = String::from("urxvt");
+        let terminal = String::from("alacritty");
 
         // This will initialize a new Config struct, place your config
         // options here.
@@ -36,7 +36,7 @@ impl Config {
             keys: vec![KeyPair::new((Mod4Mask | ShiftMask) as c_uint, "q", "quit"),
                        KeyPair::new((Mod4Mask | ShiftMask) as c_uint, "c", "close-window"),
                        KeyPair::new(Mod4Mask,                         "p", "spawn || dmenu_run"),
-                       KeyPair::new((Mod4Mask | ShiftMask) as c_uint, "Return", "spawn || urxvt"),
+                       KeyPair::new((Mod4Mask | ShiftMask) as c_uint, "Return", "spawn || alacritty"),
                        KeyPair::new(Mod4Mask,                         "r", "refresh")],
 
             border_width: 1,

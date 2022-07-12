@@ -9,13 +9,20 @@ pub fn createnotify_event(wm: &wm::WindowManager, event: xlib::XEvent) {
     unsafe {
         let e: xlib::XCreateWindowEvent = From::from(event);
 
+        // check if window has a name (complying with EWMH I think lmao):
+        let mut prop: xlib::XTextProperty = std::mem::zeroed();
+        let ret = xlib::XGetWMName(wm.display, e.window, &mut prop);
 
-        xlib::XSetWindowBorderWidth(wm.display, e.window, wm.config.border_width.try_into().unwrap());
-        xlib::XSetWindowBorder(wm.display, e.window, wm.config.border_color_normal);
+        if ret != 0 {
+            // set window border and color:
+            xlib::XSetWindowBorderWidth(wm.display, e.window, wm.config.border_width.try_into().unwrap());
+            xlib::XSetWindowBorder(wm.display, e.window, wm.config.border_color_normal);
 
-        wm::WINDOWS.push(e.window);
+            wm::WINDOWS.push(e.window);
 
-        layouts::tile(wm);
+            layouts::tile(wm);
+        }
+
     }
 }
 
@@ -34,8 +41,6 @@ pub fn destroynotify_event(wm: &wm::WindowManager, event: xlib::XEvent) {
 
             index += 1;
         }
-
-        panic!("Failed to remove window from {:?}", wm::WINDOWS);
     }
 }
 

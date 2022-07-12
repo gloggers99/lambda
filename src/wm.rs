@@ -3,7 +3,7 @@ use std::mem;
 
 use x11::xlib;
 
-use libc::{ c_int };
+use libc::{ c_int, c_uint };
 
 use crate::events;
 use crate::keys;
@@ -11,6 +11,7 @@ use crate::config;
 
 pub static mut WINDOWS: Vec<xlib::Window> = vec![];
 pub static mut KEYS: Vec<keys::KeyPair> = vec![];
+pub static mut FOCUSED_WINDOW: u64 = 0;
 
 // error handler for X11
 pub unsafe extern "C" fn x_error_handler(_display: *mut xlib::Display,
@@ -55,6 +56,15 @@ impl WindowManager {
 
             Self::add_keys(&wm, wm.config.keys.clone());
             println!("Registered keys successfully.");
+
+            // register clicks for focusing windows
+            xlib::XGrabButton(display, 1, 0, xlib::XDefaultRootWindow(display), true as c_int,
+                             (xlib::ButtonPressMask|xlib::ButtonReleaseMask|xlib::PointerMotionMask) as c_uint, xlib::GrabModeAsync, xlib::GrabModeAsync,
+                             0, 0);
+
+            xlib::XGrabButton(display, 3, 0, xlib::XDefaultRootWindow(display), true as c_int,
+                             (xlib::ButtonPressMask|xlib::ButtonReleaseMask|xlib::PointerMotionMask) as c_uint, xlib::GrabModeAsync, xlib::GrabModeAsync,
+                             0, 0);
 
             return wm;
         }
@@ -123,7 +133,7 @@ impl WindowManager {
                     xlib::CreateNotify => events::createnotify_event(self, event),
                     xlib::DestroyNotify => events::destroynotify_event(self, event),
                     xlib::KeyPress => events::keypress_event(self, event),
-                    //xlib::ButtonPress => println!("Button Pressed Event"),
+                    xlib::ButtonPress => events::buttonpress_event(self, event),
                     //xlib::ConfigureNotify => println!("Configure Notify"),
                     //xlib::ConfigureRequest => println!("Configure Request"),
                     //xlib::MapNotify => println!("Map Notify"),

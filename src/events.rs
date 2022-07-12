@@ -3,6 +3,7 @@ use x11::xlib;
 use crate::wm;
 use crate::keys;
 use crate::layouts;
+use crate::util;
 
 // executed when a window is created
 pub fn createnotify_event(wm: &wm::WindowManager, event: xlib::XEvent) {
@@ -13,10 +14,9 @@ pub fn createnotify_event(wm: &wm::WindowManager, event: xlib::XEvent) {
         let mut prop: xlib::XTextProperty = std::mem::zeroed();
         let ret = xlib::XGetWMName(wm.display, e.window, &mut prop);
 
+        // TODO: add more checks for ghost windows (they wont go away bruh)
         if ret != 0 {
-            // set window border and color:
-            xlib::XSetWindowBorderWidth(wm.display, e.window, wm.config.border_width.try_into().unwrap());
-            xlib::XSetWindowBorder(wm.display, e.window, wm.config.border_color_normal);
+            util::focus_window(wm, e.window);
 
             wm::WINDOWS.push(e.window);
 
@@ -56,7 +56,11 @@ pub fn keypress_event(wm: &wm::WindowManager, event: xlib::XEvent) {
     }
 }
 
-//pub fn buttonpress_event() {}
+pub fn buttonpress_event(wm: &wm::WindowManager, event: xlib::XEvent) {
+    let e: xlib::XButtonEvent = From::from(event);
+
+    util::focus_window(wm, e.subwindow);
+}
 
 //pub fn configurenotify_event() {}
 

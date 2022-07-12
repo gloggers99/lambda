@@ -3,6 +3,7 @@ mod events;
 mod keys;
 mod layouts;
 mod config;
+mod util;
 
 // TODO: for the most part, the ghost window bug is fixed,
 //       pavucontrol spawns an extra blank window, but it

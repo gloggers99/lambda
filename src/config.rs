@@ -18,8 +18,8 @@ pub struct Config {
     pub terminal: String,
     pub keys: Vec<KeyPair>,
     pub border_width: c_int,
-    pub border_color_focused: u64,
-    pub border_color_normal: u64
+    pub border_color_active: u64,
+    pub border_color_inactive: u64
 }
 
 impl Config {
@@ -40,8 +40,8 @@ impl Config {
                        KeyPair::new(Mod4Mask,                         "r", "refresh")],
 
             border_width: 1,
-            border_color_focused: 0xff0000,
-            border_color_normal: 0xff0000
+            border_color_active: 0xff0000,
+            border_color_inactive: 0xffffff
         };
     }
 }

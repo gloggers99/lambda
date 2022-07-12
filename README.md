@@ -1,5 +1,7 @@
 <div align = center>
 
+# lambda is going through a migration from rust to c++!
+## this branch tracks the c++ code, the main branch will be the last rust code until the c++ branch is ready.
 # lambda : X11 tiling for the refined chad
 
 <img src="https://github.com/gloggers99/lambda/raw/main/extra/logo.png" width="300" height="300" alt="banner">
